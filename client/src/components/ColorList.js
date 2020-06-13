@@ -53,8 +53,8 @@ const ColorList = ({ colors, updateColors }) => {
     })
   };
 
-  const addColor = (e, color) =>{
-    e.preventDefault();
+  const addColor = (color) =>{
+    // e.preventDefault();
     setAdding(true);
     setCreateColor(color);
     setHexCode(color);
@@ -98,8 +98,10 @@ const ColorList = ({ colors, updateColors }) => {
           </li>
         ))}
       </ul>
+      <button onClick={()=>addColor(colors)}>Add Color</button>
      
       {editing ? (<form onSubmit={saveEdit}>
+        {console.log("editing", editing)}
         <legend>edit color</legend>
         <label>
           color name:
