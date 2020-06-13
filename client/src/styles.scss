@@ -8,6 +8,19 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  background-image: url("../src/images/pieter-gqZ_FjElUhY-unsplash.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: cornflowerblue;
+
+  .link{
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    border: 2px solid purple;
+    height: fit-content;
+    font-size: 3rem;
+  }
 }
 
 .App {
@@ -97,3 +110,17 @@ form {
     margin-top: 16px;
   }
 }
+
+.login{
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  padding-left: 45rem;
+  .login-header{
+    color:white;
+    text-shadow: 2px 2px 2px black;
+  }
+}
+
+

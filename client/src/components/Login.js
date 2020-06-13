@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../axiosWithAuth";
 
 
+
 const Login = () => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
@@ -35,8 +36,8 @@ const Login = () => {
 
 
   return (
-    <>
-      <h1>Welcome to the Bubble App!</h1>
+    <div className="login">
+      <h1 className="login-header">Welcome to the Bubble App!</h1>
       <div className="login-form">
         <form onSubmit={handleSubmit}>
           <input type="text" name="username" placeholder="User Name" onChange={handleChange} value={login.username} />
@@ -44,7 +45,7 @@ const Login = () => {
           <input type="submit" />
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
