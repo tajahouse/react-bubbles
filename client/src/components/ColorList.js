@@ -25,6 +25,7 @@ const ColorList = ({ colors, updateColors }) => {
 
   const body = {...colorToEdit}
   const id = colorToEdit.id
+
   const saveEdit = e => {
     e.preventDefault();
     axiosWithAuth()
@@ -97,47 +98,46 @@ const ColorList = ({ colors, updateColors }) => {
           </li>
         ))}
       </ul>
-      {editing && (
-        <form onSubmit={saveEdit}>
-          <legend>edit color</legend>
-          <label>
-            color name:
-            <input
-              onChange={e =>
-                setColorToEdit({ ...colorToEdit, color: e.target.value })
-              }
-              value={colorToEdit.color}
-            />
-          </label>
-          <label>
-            hex code:
-            <input
-              onChange={e =>
-                setColorToEdit({
-                  ...colorToEdit,
-                  code: { hex: e.target.value }
-                })
-              }
-              value={colorToEdit.code.hex}
-            />
-          </label>
-          <div className="button-row">
-            <button type="submit">save</button>
-            <button onClick={() => setEditing(false)}>cancel</button>
-          </div>
-        </form>
-      )}
+     
+      {editing ? (<form onSubmit={saveEdit}>
+        <legend>edit color</legend>
+        <label>
+          color name:
+          <input
+            onChange={e =>
+              setColorToEdit({ ...colorToEdit, color: e.target.value })
+            }
+            value={colorToEdit.color}
+          />
+        </label>
+        <label>
+          hex code:
+          <input
+            onChange={e =>
+              setColorToEdit({
+                ...colorToEdit,
+                code: { hex: e.target.value }
+              })
+            }
+            value={colorToEdit.code.hex}
+          />
+        </label>
+        <div className="button-row">
+          <button type="submit">save</button>
+          <button onClick={() => setEditing(false)}>cancel</button>
+        </div>
+      </form>): adding}
+
       <div className="spacer" />
 
-      {adding && 
-      (<form onSubmit={addColor}>
+    <form onSubmit={addColor}>
         {console.log('Adding',adding)}
         <legend>add color</legend>
         <input type="text" name="colorName" value={createColor} onChange={handleCreateColor}/>
         <input type="text" name="hexCode" value={hexCode} onChange={handleHexCode}/>
         <input type="submit"/>
       </form>
-      )}
+      
       {/* stretch - build another form here to add a color */}
     </div>
   );
