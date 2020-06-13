@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { axiosWithAuth } from "../axiosWithAuth";
+import { useInput } from "../components/useInput"
 
 const initialColor = {
   color: "",
@@ -11,7 +12,10 @@ const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
-  const [editColor, setEditColor] = useState(initialColor);
+  const [createColor, setCreateColor, handleCreateColor] = useInput('');
+  const [hexCode, setHexCode, handleHexCode] = useInput('');
+
+
 
   const editColor = color => {
     setEditing(true);
@@ -26,7 +30,7 @@ const ColorList = ({ colors, updateColors }) => {
     const color = colors.find(color => {return color.color === colorToEdit.color})
 
     axiosWithAuth()
-    .put(`/api/colors/${colors.id}`, colorToEdit)
+    .put(`/api/colors/${color.id}`, colorToEdit)
     .then(res => {
       console.log(res);
       window.location.reload()
@@ -38,6 +42,16 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    axiosWithAuth()
+    .delete(`/api/colors/${color.id}`)
+    .then(res=>{
+      console.log(res);
+      window.location.reload()
+
+    })
+    .catch(err =>{
+      console.log("Naw girl!", err)
+    })
   };
 
   return (
