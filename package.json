@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/LambdaSchool/SPA-Routing-React/issues"
   },
-  "homepage": "hhttps://github.com/LambdaSchool/SPA-Routing-React#readme",
+  "homepage": "hhttps://github.com/LambdaSchool/SPA-Routing-React/client/",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",

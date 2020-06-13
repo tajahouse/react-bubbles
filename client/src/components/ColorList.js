@@ -98,6 +98,7 @@ const ColorList = ({ colors, updateColors }) => {
           </li>
         ))}
       </ul>
+      
       <button onClick={()=>addColor(colors)}>Add Color</button>
      
       {editing ? (<form onSubmit={saveEdit}>
