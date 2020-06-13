@@ -11,6 +11,7 @@ const initialColor = {
 const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
+  const [adding, setAdding] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
   const [createColor, setCreateColor, handleCreateColor] = useInput('');
   const [hexCode, setHexCode, handleHexCode] = useInput('');
@@ -22,18 +23,15 @@ const ColorList = ({ colors, updateColors }) => {
     setColorToEdit(color);
   };
 
+  const body = {...colorToEdit}
+  const id = colorToEdit.id
   const saveEdit = e => {
     e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
-    const color = colors.find(color => {return color.color === colorToEdit.color})
-
     axiosWithAuth()
-    .put(`/api/colors/${color.id}`, colorToEdit)
+    .put(`/api/colors/${id}`, body)
     .then(res => {
       console.log(res);
-      window.location.reload()
+      updateColors(colors.map(i => i.id === id? colorToEdit: i))
     })
     .catch(err =>{
       console.log("Naw girl!", err)
@@ -53,6 +51,28 @@ const ColorList = ({ colors, updateColors }) => {
       console.log("Naw girl!", err)
     })
   };
+
+  const addColor = (e, color) =>{
+    e.preventDefault();
+    setAdding(true);
+    setCreateColor(color);
+    setHexCode(color);
+
+    const data = {
+      color: createColor,
+      code: {hex: hexCode}
+    }
+
+    axiosWithAuth()
+    .post("/api/colors", data)
+    .then(res => {
+      console.log("Add",res);
+      updateColors(res.data)
+    })
+    .catch(err =>{
+      console.log("Naw girl!", err)
+    })
+  }
 
   return (
     <div className="colors-wrap">
@@ -108,6 +128,16 @@ const ColorList = ({ colors, updateColors }) => {
         </form>
       )}
       <div className="spacer" />
+
+      {adding && 
+      (<form onSubmit={addColor}>
+        {console.log('Adding',adding)}
+        <legend>add color</legend>
+        <input type="text" name="colorName" value={createColor} onChange={handleCreateColor}/>
+        <input type="text" name="hexCode" value={hexCode} onChange={handleHexCode}/>
+        <input type="submit"/>
+      </form>
+      )}
       {/* stretch - build another form here to add a color */}
     </div>
   );
