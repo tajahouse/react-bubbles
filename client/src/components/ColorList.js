@@ -4,8 +4,9 @@ import { axiosWithAuth } from "../axiosWithAuth";
 import { useInput } from "../components/useInput"
 
 const initialColor = {
-  color: "",
-  code: { hex: "" }
+  code: {hex: ''},
+  color: ""
+  
 };
 
 const ColorList = ({ colors, updateColors }) => {
@@ -13,7 +14,7 @@ const ColorList = ({ colors, updateColors }) => {
   const [editing, setEditing] = useState(false);
   const [adding, setAdding] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
-  const [createColor, setCreateColor, handleCreateColor] = useInput('');
+  const [createColor, setCreateColor, handleCreateColor] = useInput([]);
   const [hexCode, setHexCode, handleHexCode] = useInput('');
 
 
